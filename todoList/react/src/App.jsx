@@ -2,7 +2,7 @@ import React from 'react'
 import TodoList from './TodoList'
 import AddTodoBtn from './AddTodoBtn'
 
-class AppList extends React.Component {
+class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -63,4 +63,4 @@ class AppList extends React.Component {
         )
     }
 }
-export default AppList
+export default App
