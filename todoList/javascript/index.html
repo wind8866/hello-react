@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+    <style>
+        .todoApp li{
+            cursor: pointer;
+            color: #333;
+        } 
+        .todoApp .finish{
+            color: #999;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <main class="todoApp">
+        <header class="addTodo">
+            <input type="text" id="userInput">
+            <button id="addTodoBtn">添加</button>
+        </header>
+        <ul id="todoList">
+
+        </ul>
+    </main>
+    <script src="https://unpkg.com/art-template/lib/template-web.js"></script>
+    <script id="from-userList" type="text/html">
+        <% for(var i = 0; i < todoList.length; i++){ %>
+            <li class="<%= todoList[i]['finish'] ? 'finish' : '' %>" data-id="<%= todoList[i]['id'] %>"><%= todoList[i]['name'] %></li>
+        <% } %>
+    </script>
+    <script>
+        (function() {
+            let todoList = [
+                {
+                    id: '1',
+                    name: 'TodoList from React',
+                    finish: true,
+                }, {
+                    id: '2',
+                    name: 'TodoList from jQuery',
+                    finish: false,
+                },
+            ]
+            let count = 2
+
+            const render = () => {
+                var todoListHTML = template('from-userList', {
+                    todoList: todoList
+                });
+                document.querySelector('#todoList').innerHTML = todoListHTML
+                document.querySelectorAll('#todoList li').forEach((thisDom, index) => {
+                    thisDom.addEventListener('click', () => {
+                        const activeId = thisDom.dataset.id
+                        todoList.forEach(todo => {
+                            if(todo.id === activeId){
+                                todo.finish = !todo.finish
+                                render()
+                            }
+                        })
+                    })
+                })
+            }
+            const addTodoEvent = () => {
+                document.querySelector('#addTodoBtn').addEventListener('click', () => {
+                    const value = document.querySelector('#userInput').value
+                    todoList.push({
+                        id: ''.concat(++count),
+                        name: value,
+                        finish: false,
+                    })
+                    render()
+                })
+            }
+            const main = () => {
+                render()
+                addTodoEvent()
+            }
+            main()
+        })();
+    </script>
+</body>
+</html>
