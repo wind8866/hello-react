@@ -16,8 +16,7 @@ class App extends React.Component {
                     name: 'TodoList from jQuery',
                     finish: false,
                 },
-            ],
-            inputValue: ''
+            ]
         }
         this.count = 2
     }
@@ -38,11 +37,11 @@ class App extends React.Component {
             inputValue: test
         })
     }
-    onAddTodo = () => {
+    onAddTodo = (value) => {
         this.setState({
             list: this.state.list.concat({
                 id: ''.concat(++this.count),
-                name: this.state.inputValue,
+                name: value,
                 finish: false,
             })
         })
@@ -53,7 +52,6 @@ class App extends React.Component {
                 <AddTodoBtn
                     onAddTodo={this.onAddTodo}
                     change={this.onInputChange}
-                    value={this.state.inputValue}
                 />
                 <TodoList
                     list={this.state.list}
