@@ -18,7 +18,7 @@ let todoList = [
 let count = 2
 
 
-const formatRespond = (data = {}, code = 200) => {
+const formatRespond = ({ data = {}, code = 200 }) => {
     return JSON.stringify({
         code: code,
         message: 'ok',
@@ -27,8 +27,8 @@ const formatRespond = (data = {}, code = 200) => {
 }
 
 // 请求 todoList 接口
-app.get('/api/list', function(req, res){
-    res.send(JSON.stringify(todoList));
+app.get('/api/list', (req, res) => {
+    res.send(formatRespond({ data: todoList, code: 200 }));
 })
 
 // 添加 todo 接口
@@ -40,9 +40,9 @@ app.get('/api/add', function(req, res){
             name: req.query.name,
             finish: false,
         })
-        res.send(formatRespond(todoList, 200));
+        res.send(formatRespond({ code: 200 }));
     } else {
-        res.send(formatRespond(todoList, 501));
+        res.send(formatRespond({ code: 501 }));
     }
     
 })
@@ -59,14 +59,14 @@ app.get('/api/change', function(req, res){
             }
             return todo
         })
-        res.send(formatRespond(todoList, 200));
+        res.send(formatRespond({ code: 200 }));
     } else {
-        res.send(formatRespond(todoList, 501));
+        res.send(formatRespond({ code: 501 }));
     }
 });
 
 // 启动服务
 const port = 2333
 app.listen(port, function(){
-  console.log(`启动成功后，请访问 http://127.0.0.1:${port}`);
+  console.log(`启动成功，请访问 http://127.0.0.1:${port}`);
 });
