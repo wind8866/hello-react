@@ -3,15 +3,10 @@ import actions from '../actions/index'
 import AddTodo from '../components/AddTodo'
 
 const mapStateToProps = state => {
-    return {
-        inputValue: state.inputValue
-    }
+    return {}
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onChangeValue: text => {
-            dispatch(actions.inputChange(text))
-        },
         onAddTodo: text => {
             dispatch(actions.addTodo(text))
         }

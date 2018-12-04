@@ -14,17 +14,8 @@ const todoFinish = id => {
         },
     }
 }
-const inputChange = text => {
-    return {
-        type: 'INPUT_CHANGE',
-        payload: {
-            text,
-        },
-    }
-}
 
 export default {
     addTodo,
     todoFinish,
-    inputChange,
 }

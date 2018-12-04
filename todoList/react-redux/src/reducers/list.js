@@ -11,7 +11,7 @@ const defaultList = [
     },
 ]
 
-const list = (state = defaultList, action) => {
+const app = (state = defaultList, action) => {
     switch (action.type) {
         case 'TODO_FINISH':
             return state.map(todo => ({
@@ -28,4 +28,4 @@ const list = (state = defaultList, action) => {
             return state
     }
 }
-export default list
+export default app

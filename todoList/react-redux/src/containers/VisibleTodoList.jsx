@@ -4,7 +4,7 @@ import TodoList from '../components/TodoList'
 
 const mapStateToProps = state => {
     return {
-        list: state.list
+        list: state
     }
 }
 const mapDispatchToProps = dispatch => {
