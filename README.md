@@ -9,6 +9,7 @@ todo
 * [ ] 最佳实现：模块化、ES6语法、海信项目的长处
 
 * [ ] 实现一个react、redux、redux+react-saga的todoList
+* [ ] [在Redux中，应该把逻辑放在action creator里，还是分散在reducer里？](https://www.zhihu.com/question/62690658)
 
 ---
 
@@ -79,12 +80,60 @@ redux 数据流
 2、有可能是下载包依赖时文件错误。（[曾经遇到过手机分享网络下载的包一直报错的情况](https://segmentfault.com/q/1010000016591545)）
 解决办法：更换网络或者尝试 yarn
 
+#### this.setState({}) 是异步更新的
+```javascript
+import React from 'react'
+
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            id: null
+        }
+    }
+    getList = (userName) => {
+        // request...
+    }
+    // 因为setState 是异步的，会造成不可预期的结果
+    badFilter = (userName) => {
+        this.setState({
+            userName: userName
+        })
+        this.getList(this.state.userName)
+    }
+    // 理论上 setState 参数设置为函数会立即更新
+    // 这样会影响性能，且实际情况是仍不可控
+    goodFilter = (userName) => {
+        this.setState(() => {
+            return {
+                userName: userName
+            }
+        })
+        this.getList(this.state.userName)
+    }
+    // 最好的方式是不要在 setState 后依赖 state
+    bestFilter = (userName) => {
+        this.setState({
+            userName: userName
+        })
+        this.getList(userName)
+    }
+    render() {
+        return (
+            <div>
+                {this.state.id}
+                <button onClick={() => this.bestFilter('zhangsan')}>filter</button>
+            </div>
+        )
+    }
+}
+export default App
+```
+
 #### 不要试图手动更改 state 里的状态，会造成不可预期的结果
 
 ```javascript
 import React from 'react'
-import TodoList from './TodoList'
-import AddTodoBtn from './AddTodoBtn'
 
 class App extends React.Component {
     constructor(props) {
