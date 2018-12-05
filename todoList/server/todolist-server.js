@@ -21,52 +21,58 @@ let count = 2
 const formatRespond = ({ data = {}, code = 200 }) => {
     return JSON.stringify({
         code: code,
-        message: 'ok',
         data: data
     })
 }
 
 // 请求 todoList 接口
 app.get('/api/list', (req, res) => {
-    res.send(formatRespond({ data: todoList, code: 200 }));
+    res.send(formatRespond({ data: todoList }))
 })
 
 // 添加 todo 接口
+// name: String
 app.get('/api/add', function(req, res){
     // console.log(req, req.query)
     if(req.query.name != null) {
-        todoList.push({
+        const todo = {
             id: ''.concat(++count),
             name: req.query.name,
             finish: false,
-        })
-        res.send(formatRespond({ code: 200 }));
+        }
+        todoList.push(todo)
+        console.log('请求成功', req.query)
+        res.send(formatRespond({ data: todo }))
     } else {
-        res.send(formatRespond({ code: 501 }));
+        console.error('请求失败', req.query)
+        res.send(formatRespond({ code: 501 }))
     }
     
 })
 
 // changeFinish 接口
+// id: String
 app.get('/api/change', function(req, res){
     if(req.query.id != null) {
         todoList = todoList.map(todo => {
             if(req.query.id === todo.id){
-                return {
+                const newTodo = {
                     ...todo,
                     finish: !todo.finish
                 }
+                console.log('修改成功', newTodo)
+                return newTodo
             }
             return todo
         })
-        res.send(formatRespond({ code: 200 }));
+        res.send(formatRespond({ code: 200 }))
     } else {
-        res.send(formatRespond({ code: 501 }));
+        res.send(formatRespond({ code: 501 }))
     }
 });
 
 // 启动服务
 const port = 2333
 app.listen(port, function(){
-  console.log(`启动成功，请访问 http://127.0.0.1:${port}`);
+  console.log(`启动成功，请访问 http://127.0.0.1:${port}`)
 });
