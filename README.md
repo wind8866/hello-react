@@ -1,4 +1,3 @@
-[toc]
 # Hello React
 
 ## 项目说明
