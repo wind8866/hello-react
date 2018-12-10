@@ -47,7 +47,6 @@ app.get('/api/add', function(req, res){
         console.error('请求失败', req.query)
         res.send(formatRespond({ code: 501 }))
     }
-    
 })
 
 // changeFinish 接口
