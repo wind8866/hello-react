@@ -1,3 +1,5 @@
+[toc]
+
 # Hello React
 
 ## 项目说明
@@ -228,18 +230,19 @@ Keys应该是稳定的，可预测的，且唯一的。
 - 有很多坑
 
 ## 各项目所遇到的问题
-#### 1、模块全生命周期
-- webpack 没配置好导致打包文件为10M
-- react 结合 echarts 传递参数非常困难
+#### 模块全生命周期
+- [ ] webpack 没配置好导致打包文件为10M
+- [x] react 结合 echarts 传递参数非常困难
 
-#### 2、权限中心 & Spendqd
-- 一个组件三个人都实现了一遍，而且交互逻辑不一致
-- 交互逻辑不一致导致出现"BUG"
-- 函数(变量)命名方式不一致
-- 命名方式与业务逻辑耦合导致快速开发受阻（见下例）
-- 没有更好的区分纯组件、业务逻辑组件（[容器组件和展示组件](https://www.redux.org.cn/docs/basics/UsageWithReact.html)）
-- 路由跳转不能清除表单
-- 没有公共方法能够改变各 module 里的 state（每个module都要写 changeKeyValue 方法）
+#### 权限中心 & Spendqd
+- [x] 一个组件三个人都实现了一遍
+- [x] 交互逻辑不一致导致出现"BUG"
+- [x] 函数(变量)命名方式不一致
+- [x] 命名方式与业务逻辑耦合导致快速开发受阻（见下例）
+- [x] 没有更好的区分纯组件、业务逻辑组件（[容器组件和展示组件](https://www.redux.org.cn/docs/basics/UsageWithReact.html)）
+- [ ] 路由跳转不能自动清除表单
+- [ ] 没有公共方法能够改变各 module 里的 state（每个module都要写 changeKeyValue 方法）
+- [ ] 从 view => models => server，每一步都要传递接收参数，很麻烦
 
 ```javascript
 // 命名方式与业务逻辑耦合导致快速开发受阻
@@ -260,18 +263,26 @@ const list = [
 ]
 ```
 
-**3、datamart **
+#### datamart
 - 使用jQuery操作DOM
 - 没有模块化，一个文件3000多行导致难以更新迭代
 - 使用 react-scripts(creat-react-app) 搭建开发环境导致不可配置且特别慢
 
-**4、Antd Design Pro**
+#### Antd Design Pro & 海信项目
+好的地方
+- webpackrc.js 配置@操作符，指向/src目录，以后写相对于src的路径，不用../../../，只用 @/pages/golbel.js
+- 业务逻辑 models 写在 /src/pages/page/models 中，共用 models 写在 /src/models/globle.js 中
+- 
+
+
 
 ## 下一个项目
 #### 应该遵守的规则
-- 多人协作时分配共用组件，避免重复开发
+- 约定大于配置
+    - 多人协作时分配共用组件，避免重复开发
+    - 交互逻辑要一致
 - 多写纯组件（容器组件），一次开发，随处可用
-- 交互逻辑要一致
+- 对数据请求进行封装
 
 纯组件：不涉及 state，可移植到别的项目，放在 /component
 业务逻辑组件：涉及 state，与业务耦合，放在 /containers
