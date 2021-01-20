@@ -1,5 +1,7 @@
 [toc]
 
+update：见[README-v2.md](./README-v2.md)
+---
 # Hello React
 
 ## 项目说明
