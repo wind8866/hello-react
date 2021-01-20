@@ -1,0 +1,21 @@
+.already {
+  color: #999;
+  display: none;
+}
+.show-all .already {
+  display: block;
+}
+.todo-list {
+  list-style: none;
+  margin-left: 0;
+  padding: 10px;
+  min-width: 280px;
+  background: #f0f0f0;
+  display: inline-block;
+}
+.todo-list li {
+  cursor: pointer;
+}
+.todo-list li:hover {
+  color: skyblue;
+}
