@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO LIST</title>
+  <style>
+    .already {
+      color: #999;
+      display: none;
+    }
+    .show-all .already {
+      display: block;
+    }
+    .todo-list {
+      list-style: none;
+      margin-left: 0;
+      padding: 10px;
+      min-width: 280px;
+      background: #f0f0f0;
+      display: inline-block;
+    }
+    .todo-list li {
+      cursor: pointer;
+    }
+    .todo-list li:hover {
+      color: skyblue;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <input type="text" placeholder="Please enter todo" id="input">
+  <button id="add">Add</button>
+  <label for="all">
+    Show All
+    <input id="all" type="checkbox" checked >
+  </label>
+</header>
+<main>
+  <ul class="todo-list show-all"></ul>
+</main>
+<script>
+  const inputDOM = document.querySelector('#input');
+  const addDOM = document.querySelector('#add');
+  const allDOM = document.querySelector('#all');
+  const todoWrapDOM = document.querySelector('.todo-list');
+
+  const addTodo = e => {
+    const value = inputDOM.value;
+    if (typeof value === 'string' && value.trim()) {
+      const li = document.createElement('li');
+      li.innerText = value.trim();
+      todoWrapDOM.appendChild(li);
+      
+      inputDOM.value = '';
+      inputDOM.focus();
+    } else {
+      console.error(new Error('输入框不能为空'));
+    }
+  };
+  addDOM.addEventListener('click', addTodo)
+  inputDOM.addEventListener('keypress', e => {
+    if (e.charCode === 13) {
+      addTodo()
+    }
+  })
+
+  todoWrapDOM.addEventListener('click', e => {
+    const target = e.target;
+    if (target.tagName.toLowerCase() === 'li') {
+      target.classList.toggle('already');
+    }
+  });
+
+  allDOM.addEventListener('change', e => {
+    todoWrapDOM.classList.toggle('show-all');
+  });
+
+</script>
+</body>
+</html>
