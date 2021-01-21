@@ -3,14 +3,20 @@ import TodoTopBar from './TodoTopBar';
 import TodoList from './TodoList';
 import './index.css';
 
+const LOCALKEY = 'todoListData';
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
+    this.defaultState = {
+      input: '',
+      showAll: true,
+      todoList: [],
+    };
     this.state = {
       input: '',
       showAll: true,
       todoList: [],
-    }
+    };
     this.inputRef = React.createRef();
   }
   add = () => {
@@ -51,10 +57,29 @@ class TodoApp extends React.Component {
   inputKeypress = (e) => {
     if (e.charCode === 13) {
       this.add();
+      this.saveLocal();
     }
+  }
+  getLocal = () => {
+    const localState = JSON.parse(localStorage.getItem(LOCALKEY));
+    this.setState(localState);
+  }
+  clearTodo = () => {
+    this.setState({
+      ...this.defaultState
+    })
+  }
+  saveLocal = () => {
+    const stateJSON = JSON.stringify(this.state);
+    localStorage.setItem(LOCALKEY, stateJSON);
   }
   componentDidMount() {
     this.inputRef.current.focus();
+    this.getLocal();
+    window.addEventListener('beforeunload', this.saveLocal);
+  }
+  componentWillUnmount() {
+    window.addEventListener('beforeunload', this.saveLocal);
   }
 
   render() {
@@ -70,6 +95,7 @@ class TodoApp extends React.Component {
       add,
       changeShow,
       finish,
+      clearTodo,
     } = this;
     return (<div>
       <TodoTopBar
@@ -80,11 +106,12 @@ class TodoApp extends React.Component {
         showAll={showAll}
         add={add}
         changeShow={changeShow}
+        clearTodo={clearTodo}
       />
       <TodoList
         className={showAll ? 'show-all todo-list' : 'todo-list'}
         list={todoList}
-        finish={finish}
+        onClick={finish}
       />
     </div>)
   }

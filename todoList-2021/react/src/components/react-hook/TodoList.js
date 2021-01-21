@@ -5,7 +5,7 @@ const TodoList = (props) => {
     {props.list.map((todo) => (<li
       className={todo.finish ? 'already' : ''}
       key={todo.id}
-      onClick={() => props.finish(todo.id)}
+      onClick={() => props.onClick(todo.id)}
     >
       {todo.id}: {todo.text}
     </li>))}

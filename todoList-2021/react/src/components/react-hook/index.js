@@ -63,7 +63,7 @@ const TodoApp = (props) => {
       <TodoList
         className={showAll ? 'show-all todo-list' : 'todo-list'}
         list={todoList}
-        finish={onfinishHandle}
+        onClick={onfinishHandle}
       />
     </React.Fragment>
   )
