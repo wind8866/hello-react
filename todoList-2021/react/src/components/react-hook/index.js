@@ -1,14 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import TodoTopBar from './TodoTopBar';
 import TodoList from './TodoList';
-import './index.css';
+import ViewAll from './store';
 
 
 const TodoApp = (props) => {
-
-  const [input, inputChange] = useState('');
-  const inputChangeHandle = (e) => inputChange(e.target.value);
-
 
   const [showAll, showAllChange] = useState(true);
   const changeShow = () => showAllChange(!showAll);
@@ -24,48 +20,36 @@ const TodoApp = (props) => {
     todoListChange(newTodoList);
   }
 
+  // 其实这里也可以放到TodoTopBar组件中
   const inputRef = useRef();
   useEffect(() => {
+    // TODO: 改为只在第一次获取焦点
     inputRef.current.focus();
   })
 
-  const add = () => {
-    if (input.trim()) {
-      todoListChange(todoList.concat([{
-        text: input.trim(),
-        id: todoList.length,
-        finish: false,
-      }]));
-      inputChange('');
+  const push = (text) => {
+    todoListChange(todoList.concat([{
+      text,
+      id: todoList.length,
+      finish: false,
+    }]));
 
-      inputRef.current.focus();
-    } else {
-      console.error('enter is empty')
-    }
-  }
-  const inputKeypress = (e) => {
-    if (e.charCode === 13) {
-      add();
-    }
+    inputRef.current.focus();
   }
   
+  
   return (
-    <React.Fragment>
+    <ViewAll.Provider value={showAll}>
       <TodoTopBar
         ref={inputRef}
-        value={input}
-        onKeyPress={inputKeypress}
-        onChange={inputChangeHandle}
-        showAll={showAll}
-        add={add}
+        add={push}
         changeShow={changeShow}
       />
       <TodoList
-        className={showAll ? 'show-all todo-list' : 'todo-list'}
         list={todoList}
         onClick={onfinishHandle}
       />
-    </React.Fragment>
+    </ViewAll.Provider>
   )
 }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import TodoTopBar from './TodoTopBar';
 import TodoList from './TodoList';
-import './index.css';
 
 const LOCALKEY = 'todoListData';
 class TodoApp extends React.Component {

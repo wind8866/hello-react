@@ -12,8 +12,9 @@
 - [ ] 错误监控
 
 **react-hook**
-- [ ] 失焦后自动缓存输入、加载自动读取
-- [ ] 输入框事件放入子组件中
+- [x] 输入框事件放入子组件中⏳
+- [x] 使用showAll使用store管理
+- [ ] 与my-redux结合
 - [ ] 加入添加时间（可选）
 - [ ] 可删除
 - [ ] 加入支持markdown的加粗语法
@@ -21,9 +22,11 @@
 - [ ] redux版本
 - [ ] Mobx版本
 - [ ] 的TypeScript版本
+- [ ] setState调用但不改变state会执行willUpdate吗？
 
 
 **其他**
+- [ ] 手动实现redux、redux-react
 - [ ] 以webpack为底层，从零开始搭建一套React的环境（对标umi）
 - [ ] react的最佳实践Antd-Pro有哪些值得学习的？
 - [ ] 总结

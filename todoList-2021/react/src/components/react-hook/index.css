@@ -1,6 +1,5 @@
 .already {
   color: #999;
-  display: none;
 }
 .show-all .already {
   display: block;

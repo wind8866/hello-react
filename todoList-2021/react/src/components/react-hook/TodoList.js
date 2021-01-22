@@ -1,14 +1,13 @@
 import React from 'react';
+import Item from './Item';
 
 const TodoList = (props) => {
-  return (<ul className={props.className}>
-    {props.list.map((todo) => (<li
-      className={todo.finish ? 'already' : ''}
+  return (<ul className="todo-list">
+    {props.list.map((todo) => (<Item
       key={todo.id}
-      onClick={() => props.onClick(todo.id)}
-    >
-      {todo.id}: {todo.text}
-    </li>))}
+      onClick={props.onClick}
+      {...todo}
+    />))}
   </ul>)
 }
 export default TodoList;
