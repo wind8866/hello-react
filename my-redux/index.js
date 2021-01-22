@@ -1,18 +1,25 @@
 
 
-const initState = () => {
-  let state = {
-    title: 'redux',
-    content: 'This is my redux',
-  };
+const initState = (defaultState) => {
+  let state = defaultState;
+
   const getState = () => state;
-  const setTitle = title => { state.title = title };
-  const setContent = content => { state.content = content };
+  const dispatch = (action) => {
+    switch(action.type) {
+      case 'SET_TITLE':
+        state.title = action.title;
+        break;
+      case 'SET_CONTENT':
+        state.content = action.content;
+        break;
+      default:
+        console.info(new Error('No Actiion'));
+    }
+  }
 
   return {
     getState,
-    setTitle,
-    setContent,
+    dispatch,
   }
 }
 
@@ -27,12 +34,15 @@ const renderContent = (text) => {
   rootDOM.innerText = text;
 };
 
-const { getState, setTitle } = initState();
-setTitle('react');
+const { getState, dispatch } = initState({
+  title: 'redux',
+  content: 'This is my redux',
+});
+dispatch({type: 'SET_TITLE', title: 'react3'});
 
-const render = () => {
-  renderTitle(getState().title);
-  renderContent(getState().content);
+const render = (state) => {
+  renderTitle(state.title);
+  renderContent(state.content);
 };
 
-render();
+render(getState());
