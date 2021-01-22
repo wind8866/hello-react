@@ -1,7 +1,21 @@
-let state = {
-  title: 'redux',
-  content: 'This is my redux',
-};
+
+
+const initState = () => {
+  let state = {
+    title: 'redux',
+    content: 'This is my redux',
+  };
+  const getState = () => state;
+  const setTitle = title => { state.title = title };
+  const setContent = content => { state.content = content };
+
+  return {
+    getState,
+    setTitle,
+    setContent,
+  }
+}
+
 
 const renderTitle = (text) => {
   const rootDOM = document.querySelector('#title');
@@ -13,12 +27,12 @@ const renderContent = (text) => {
   rootDOM.innerText = text;
 };
 
-// 可被随意修改
-state.title = 'react'
+const { getState, setTitle } = initState();
+setTitle('react');
 
 const render = () => {
-  renderTitle(state.title);
-  renderContent(state.content);
+  renderTitle(getState().title);
+  renderContent(getState().content);
 };
 
 render();
