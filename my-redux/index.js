@@ -17,16 +17,17 @@ const render = (state, oldState = {}) => {
   renderContent(state.content, oldState.content);
 };
 
-const createStore = (defaultState, stateChanger) => {
-  let state = defaultState;
+const createStore = (reducer) => {
+  let state = null;
   const listeners = [];
   let oldState = state;
   const getState = () => state;
   const dispatch = (action) => {
     oldState = state;
-    state = stateChanger(action, state);
+    state = reducer(action, state);
     listeners.forEach(listener => listener(state, oldState));
   };
+  dispatch();
   const subscribe = listener => listeners.push(listener);
   return {
     getState,
@@ -35,11 +36,13 @@ const createStore = (defaultState, stateChanger) => {
   }
 }
 
-const defaultState = {
-  title: 'redux',
-  content: 'This is my redux',
-};
-const stateChanger = (action, state) => {
+const reducer = (action, state) => {
+  if (!state) {
+    return {
+      title: 'redux',
+      content: 'This is my redux',
+    };
+  }
   switch(action.type) {
     case 'SET_TITLE':
       return {
@@ -57,9 +60,10 @@ const stateChanger = (action, state) => {
       console.info(new Error('No Actiion'));
   }
 }
-const { getState, dispatch, subscribe } = createStore(defaultState, stateChanger);
+const { getState, dispatch, subscribe } = createStore(reducer);
+
 subscribe((state, oldState) => render(state, oldState));
-subscribe(() => console.log('render end'));
+// subscribe(() => console.log('render end'));
 
 
 dispatch({type: 'SET_TITLE', title: 'react3'});
