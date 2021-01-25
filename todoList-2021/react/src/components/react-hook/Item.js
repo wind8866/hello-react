@@ -11,12 +11,9 @@ const Item = (props) => {
     e.stopPropagation()
     props.onDel(props.id)
   }
-  return (<li
-    className={props.finish ? 'already' : ''}
-    onClick={() => props.onClick(props.id)}
-  >
-    {props.id}: {props.text} 
-    <span onClick={onDel} style={{color: '#f00', float: 'right'}}>Del</span>
+  return (<li className={props.finish ? 'already' : ''}>
+    <span className="todo-text" onClick={() => props.onClick(props.id)}>{props.id}: {props.text}</span>
+    <span className="del" onClick={onDel} style={{color: '#f00', float: 'right'}}>Del</span>
   </li>);
 }
 

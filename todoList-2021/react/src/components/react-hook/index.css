@@ -8,13 +8,18 @@
   list-style: none;
   margin-left: 0;
   padding: 10px;
-  min-width: 280px;
   background: #f0f0f0;
   display: inline-block;
 }
-.todo-list li {
+.todo-list .todo-text {
   cursor: pointer;
+  min-width: 200px;
+  display: inline-block;
+  margin-right: 1em;
 }
-.todo-list li:hover {
+.todo-list .todo-text:hover {
   color: skyblue;
+}
+.del {
+  cursor: pointer;
 }
