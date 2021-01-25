@@ -23,9 +23,9 @@
 - [ ] Mobx版本（可选）
 - [ ] TypeScript版本
 *需求*
-- [ ] 加入添加时间（可选）
-- [ ] 可删除
-- [ ] 加入支持markdown的加粗语法
+- [x] ~~加入添加时间（可选）~~，意义不大，在useEffect的函数中返回一个函数，执行删除事件即可防止内存泄漏。
+- [x] 可删除
+- [x] ~~加入支持markdown的加粗语法~~，与react无关，使用[dangerouslysetinnerhtml](https://zh-hans.reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml)可设置html
 - [ ] 加入异步请求，服务端支持
 
 **dva、antd、antd-pro**

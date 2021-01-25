@@ -6,11 +6,17 @@ const Item = (props) => {
   if (!show && props.finish) {
     return null;
   }
+  const onDel = (e) => {
+    console.log(e);
+    e.stopPropagation()
+    props.onDel(props.id)
+  }
   return (<li
     className={props.finish ? 'already' : ''}
     onClick={() => props.onClick(props.id)}
   >
-    {props.id}: {props.text}
+    {props.id}: {props.text} 
+    <span onClick={onDel} style={{color: '#f00', float: 'right'}}>Del</span>
   </li>);
 }
 

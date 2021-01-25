@@ -6,6 +6,7 @@ const TodoList = (props) => {
     {props.list.map((todo) => (<Item
       key={todo.id}
       onClick={props.onClick}
+      onDel={props.onDel}
       {...todo}
     />))}
   </ul>)
