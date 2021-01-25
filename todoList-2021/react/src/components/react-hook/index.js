@@ -3,8 +3,11 @@ import TodoTopBar from './TodoTopBar';
 import TodoList from './TodoList';
 import ViewAll from './store';
 import api from '../../api/index';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import theme from './reducers/todo';
 
-
+const store = createStore(theme);
 const TodoApp = (props) => {
 
   const [showAll, showAllChange] = useState(true);
@@ -61,19 +64,23 @@ const TodoApp = (props) => {
   }
   
   return (
-    <ViewAll.Provider value={showAll}>
-      <TodoTopBar
-        ref={inputRef}
-        add={push}
-        changeShow={changeShow}
-      />
-      <TodoList
-        list={todoList}
-        onClick={onfinishHandle}
-        onDel={onDelHandle}
-      />
-      {loading ? 'loading...' : null}
-    </ViewAll.Provider>
+    <div>
+      <Provider store={store}>
+        <ViewAll.Provider value={showAll}>
+          <TodoTopBar
+            ref={inputRef}
+            add={push}
+            changeShow={changeShow}
+          />
+          <TodoList
+            list={todoList}
+            onClick={onfinishHandle}
+            onDel={onDelHandle}
+          />
+          {loading ? 'loading...' : null}
+        </ViewAll.Provider>
+      </Provider>
+    </div>
   )
 }
 
