@@ -7,7 +7,7 @@ const AddTodo = () => {
   const addHandle = () => {
     const node = ref?.current;
     if (node) {
-      dispatch(actions.add(node.value));
+      dispatch(actions.addAsync(node.value));
       node.value = '';
     }
   }

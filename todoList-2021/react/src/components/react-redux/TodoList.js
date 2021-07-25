@@ -13,7 +13,7 @@ const TodoList = () => {
   const dispatch = useDispatch();
 
   const onClick = (id) => {
-    dispatch(actions.finish(id));
+    dispatch(actions.finishAsync(id));
   }
   return (
     <ul>
