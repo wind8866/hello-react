@@ -11,7 +11,7 @@ import {
 import TodoAppObject from './components/react-object/index.js';
 import TodoAppHook from './components/react-hook/index.js';
 import TodoAppRedux from './components/react-redux-saga/index.js';
-import TodoAppHook2 from './components/react-hook-2/index.js';
+import ReduceContext from './components/react-reduce-context';
 import './components/react-hook/index.css';
 
 const App = () => (<div>
@@ -19,7 +19,7 @@ const App = () => (<div>
     <Link to="/demo0">TodoAppObject</Link> <br/>
     <Link to="/demo1">TodoAppHook</Link> <br/>
     <Link to="/demo2">TodoAppRedux</Link> <br/>
-    <Link to="/demo3">TodoAppHook2</Link> <br/>
+    <Link to="/demo3">ReduceContext</Link> <br/>
     <hr/>
     <Switch>
       <Route path="/demo0">
@@ -35,10 +35,9 @@ const App = () => (<div>
         <TodoAppRedux />
       </Route>
       <Route path="/demo3">
-        <h1>TodoAppHook2</h1>
-        <TodoAppHook2 />
+        <h1>ReduceContext</h1>
+        <ReduceContext />
       </Route>
-      
     </Switch>
   </Router>
 </div>)
