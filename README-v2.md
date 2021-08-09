@@ -43,3 +43,4 @@ TypeScript
 - [x] 现在怎么管理状态、还需要redux吗？需要，redux提供了 reducer 的单向数据流改变数据的方式
 - [ ] 完成⏳标记的
 - [ ] 总结
+- [ ] 加入 immer
