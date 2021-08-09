@@ -242,9 +242,9 @@ Keys应该是稳定的，可预测的，且唯一的。
 - [x] 函数(变量)命名方式不一致
 - [x] 命名方式与业务逻辑耦合导致快速开发受阻（见下例）
 - [x] 没有更好的区分纯组件、业务逻辑组件（[容器组件和展示组件](https://www.redux.org.cn/docs/basics/UsageWithReact.html)）
-- [ ] 路由跳转不能自动清除表单
+- [x] 路由跳转不能自动清除表单（这个其实是不能使用全局状态，应该使用react自己的状态）
 - [ ] 没有公共方法能够改变各 module 里的 state（每个module都要写 changeKeyValue 方法）
-- [ ] 从 view => models => server，每一步都要传递接收参数，很麻烦
+- [x] 从 view => models => server，每一步都要传递接收参数，很麻烦，直接传递对象即可
 
 ```javascript
 // 命名方式与业务逻辑耦合导致快速开发受阻
